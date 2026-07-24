@@ -1078,7 +1078,7 @@ def checkblogposts(papers,directory='temp'):
                 [out.append("") for _ in range(5)] 
 
                 #out.append("*"+p['title'].strip(".").replace("$", "$$")+"*.\\")
-                out.append(p['author'].replace("D. Gerosa","**D. Gerosa**").strip(".")+".\\")
+                out.append(p['author'].replace("C. Anselmo","**C. Anselmo**").strip(".")+".\\")
                 line=""
                 if p['link']:
                     line+='['

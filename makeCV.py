@@ -285,7 +285,8 @@ def parsepapers(papers,filename="parsepapers.tex"):
     print('Parse papers from database')
 
     out=[]
-    for k in ['submitted','published','proceedings']:
+    #for k in ['submitted','published','proceedings']:
+    for k in ['published','proceedings']:
         i = len(papers[k]['data'])
 
 

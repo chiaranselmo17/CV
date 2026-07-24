@@ -1171,7 +1171,7 @@ if __name__ == "__main__":
     metricstalks(talks)
     parsegroup(group)
     CVshort()
-    buildbib()
+    #buildbib()
 
     # Website
     markdownpapers(papers)

@@ -1181,7 +1181,7 @@ if __name__ == "__main__":
     checkblogposts(papers)
 
     # Database
-    replacekeys()
+    #replacekeys()
 
     # Clean auxiliary files
     os.system('rm -f *.aux *.log *.toc *.out *.bbl *.blg *.fls *.fdb_latexmk *.synctex.gz *.nav *.snm *.vrb *.lof *.lot *Notes.bib')

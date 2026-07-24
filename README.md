@@ -1,31 +1,10 @@
 # Chiara Anselmo, CV
 
-Here is where I keep my CV, publication list, talks, etc. Based on [this template](https://github.com/dgerosa/CV) by Davide Gerosa.
+Here is where I keep my CV, publication list, talks, etc. Based on Davide Gerosa's [template](https://github.com/dgerosa/CV).
 
 Pdf files can be accessed using the links below:
 
-- [**Full CV**](https://github.com/dgerosa/CV/releases/latest/download/DavideGerosa_fullCV.pdf)
-- [**Short CV**](https://github.com/dgerosa/CV/releases/latest/download/DavideGerosa_shortCV.pdf)
-- [**Publication list**](https://github.com/dgerosa/CV/releases/latest/download/DavideGerosa_publist.pdf)
-- [**Talk list**](https://github.com/dgerosa/CV/releases/latest/download/DavideGerosa_talklist.pdf)
-
-
-## Workflow
-
-The only files one needs to change are `database.py` and `CV.tex`. Everything else is machine-generated.
-
-- Add new papers, talks, and students in `database.py` in the same format as the others. The order is important.
-- Touch the other things in the CV directly in `CV.tex`.
-- Tags `%mark_CVshort` indicate what to exclude when building the short version of the CV.
-
-Then type
-```shell
-python makeCV.py "commit message"
-```
-
-- Fetch citations from [ADS](https://davidegerosa.com/myads) and [INSPIRE](https://davidegerosa.com/myinspire).
-- Put together papers and talks in tex format.
-- Fetch full bibtex record from [ADS](https://davidegerosa.com/myads) for a `.bib` file.
-- Create markdown pages `_*.md` for a Jekyll website like [Davide's](https://davidegerosa.com).
-- Sanitize the database if the ADS key changed.
-- Push to git
+- [**Full CV**](https://github.com/chiaranselmo17/CV/releases/latest/download/ChiaraAnselmo_fullCV.pdf)
+- [**Short CV**](https://github.com/chiaranselmo17/CV/releases/latest/download/ChiaraAnselmo_shortCV.pdf)
+- [**Publication list**](https://github.com/chiaranselmo17/CV/releases/latest/download/ChiaraAnselmo_publist.pdf)
+- [**Talk list**](https://github.com/chiaranselmo17/CV/releases/latest/download/ChiaraAnselmo_talklist.pdf)

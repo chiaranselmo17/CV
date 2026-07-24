@@ -11,15 +11,15 @@ others = True
 talks  = {}
 conferences= True
 seminars = True
-lectures = False
+lectures = True
 posters = True
-outreach = False
+outreach = True
 
 group  = {}
-fellowships = False
-postdocs = False
-phd = False
-msc = False
+fellowships = True
+postdocs = True
+phd = True
+msc = True
 bsc = True
 
 

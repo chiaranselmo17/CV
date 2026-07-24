@@ -33,7 +33,6 @@ jobs:
           sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra gh
 
       - name: Compile latex
-        working-directory: CV
         run: |
           pdflatex CV.tex
           pdflatex CVshort.tex

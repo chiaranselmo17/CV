@@ -40,7 +40,7 @@ if published:
         "journal":  "Physical Review D",
         "link":     "https://journals.aps.org/prd/abstract/10.1103/52cd-81m5",
         "arxiv":    "arXiv:2512.05193 [gr-qc]",
-        "ads":      "2026PhRvD.113l4047A,
+        "ads":      "2026PhRvD.113l4047A",
         "inspire":  "Anselmo:2025ehx",
         "more":     ""
         })

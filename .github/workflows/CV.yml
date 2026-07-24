@@ -32,10 +32,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra gh
 
-      - name: Compile CVs
+      - name: Compile latex
+        working-directory: CV
         run: |
-          for f in CV CVshort publist talklist; do
-            pdflatex "$f".tex
+          pdflatex CV.tex
+          pdflatex CVshort.tex
+          pdflatex publist.tex
+          pdflatex talklist.tex
 
       - name: Upload PDFs
         uses: actions/upload-artifact@v4

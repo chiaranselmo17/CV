@@ -3,8 +3,8 @@ import sys,os
 import json
 
 papers = {}
-submitted = True
-published = False
+submitted = False
+published = True
 proceedings = False
 others = True
 
@@ -29,21 +29,21 @@ if submitted:
     papers['submitted']['label'] = 'Submitted papers'
     papers['submitted']['data'] = []
 
-    papers['submitted']['data'].append({
-        "title":    "Black-hole ringdown with templates capturing spin precession: a critical re-analysis of GW190521",
-        "author":   "C. Anselmo, C. Pacilio, D. Gerosa",
-        "journal":  "",
-        "link":     "",
-        "arxiv":    "arXiv:2512.05193 [gr-qc]",
-        "ads":      "2025arXiv251205193A,
-        "inspire":  "Anselmo:2025ehx",
-        "more":     ""
-        })
-
 if published:
     papers['published'] = {}
     papers['published']['label'] = 'Papers published in major peer-reviewed journals'
     papers['published']['data'] = []
+
+    papers['published']['data'].append({
+        "title":    "Black-hole ringdown with templates capturing spin precession: A reanalysis of GW190521",
+        "author":   "C. Anselmo, C. Pacilio, D. Gerosa",
+        "journal":  "Phys. Rev. D",
+        "link":     "https://journals.aps.org/prd/abstract/10.1103/52cd-81m5",
+        "arxiv":    "arXiv:2512.05193 [gr-qc]",
+        "ads":      "2026PhRvD.113l4047A,
+        "inspire":  "Anselmo:2025ehx",
+        "more":     ""
+        })
 
 
 if proceedings:
@@ -89,15 +89,6 @@ if conferences:
         "invited":  False,
         "more":     ""
         })
-        
-    talks['conferences']['data'].append({
-        "title":    "Improved gravitational wave parameter estimation with SBI and secondary mode marginalization",
-        "what":     "AIslands 2025: Bute",
-        "where":    "Rothesay, Isle of Bute, Scotland",
-        "when":     "May 2025",
-        "invited":  False,
-        "more":     ""
-        })
 
 
 if seminars:
@@ -118,11 +109,20 @@ if posters:
     talks['posters']['data'] = []
 
     talks['posters']['data'].append({
-        "title":    "Exploitation of gravitational-wave data",
-        "what":    "Milano-Bicocca Physics Department 25th anniversary",
-        "where":    "Milan, Italy",
-        "when":     "Sep 2024",
-        "invited":  True,
+        "title":    "Ringdown analysis with SBI and secondary mode marginalization",
+        "what":    "European AI for Fundamental Physics Conference (EuCAIFCon) 2025",
+        "where":    "Cagliari, Italy",
+        "when":     "Jun 2025",
+        "invited":  False,
+        "more":     ""
+        })
+
+    talks['posters']['data'].append({
+        "title":    "Ringdown analysis with SBI and secondary mode marginalization",
+        "what":    "GR24 and Amaldi16",
+        "where":    "Glasgow, UK",
+        "when":     "Jul 2025",
+        "invited":  False,
         "more":     ""
         })
 

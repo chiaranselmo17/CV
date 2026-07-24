@@ -3,9 +3,9 @@ import sys,os
 import json
 
 papers = {}
-submitted = False
+submitted = True
 published = True
-proceedings = False
+proceedings = True
 others = True
 
 talks  = {}

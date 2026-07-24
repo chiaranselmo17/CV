@@ -285,8 +285,7 @@ def parsepapers(papers,filename="parsepapers.tex"):
     print('Parse papers from database')
 
     out=[]
-    #for k in ['submitted','published','proceedings']:
-    for k in ['published']:
+    for k in ['submitted','published','proceedings']:
         i = len(papers[k]['data'])
 
 
@@ -339,18 +338,17 @@ def metricspapers(papers,filename="metricspapers.tex"):
     out.append("\cvitem{}{\\begin{tabular}{rcl}")
     out.append("\\textcolor{mark_color}{\\textbf{Publications}}: &\hspace{0.3cm} &")
     out.append("\\textbf{"+str(len(papers['published']['data']))+"} papers published in major peer-reviewed journals,")
-    #if len(papers['submitted']['data'])>1:
-    #    out.append("\\textbf{"+str(len(papers['submitted']['data']))+"} papers in submission stage,")
-    #elif len(papers['submitted']['data'])==1:
-    #    out.append("\\textbf{"+str(len(papers['submitted']['data']))+"} paper in submission stage,")
+    if len(papers['submitted']['data'])>1:
+        out.append("\\textbf{"+str(len(papers['submitted']['data']))+"} papers in submission stage,")
+    elif len(papers['submitted']['data'])==1:
+        out.append("\\textbf{"+str(len(papers['submitted']['data']))+"} paper in submission stage,")
 
     #out.append("\\\\ & &")
     #out.append("\\textbf{"+str(len(papers['proceedings']['data']))+"} other publications (white papers, proceedings, etc.)")
     #out.append("\\\\ & &")
 
     first_author = []
-    #for k in ['submitted','published','proceedings']:
-    for k in ['published']:
+    for k in ['submitted','published','proceedings']:
         for p in papers[k]['data']:
             if "C. Anselmo" not in p['author']:
                 raise ValueError("Looks like you're not an author:", p['title'])
@@ -359,8 +357,7 @@ def metricspapers(papers,filename="metricspapers.tex"):
     out.append("(out of which \\textbf{"+str(np.sum(first_author))+"} first-authored papers and")
 
     press_release = []
-    #for k in ['submitted','published','proceedings']:
-    for k in ['published']:
+    for k in ['submitted','published','proceedings']:
         for p in papers[k]['data']:
             press_release.append("press release" in p['more'])
 
@@ -375,11 +372,8 @@ def metricspapers(papers,filename="metricspapers.tex"):
     hind_including = hindex(max_citations_including)
 
     # excluding long-authorlist
-    #ads_citations = np.concatenate([[p['ads_citations'] for p in papers[k]['data']] for k in ['submitted','published']])
-    ads_citations = np.concatenate([[p['ads_citations'] for p in papers[k]['data']] for k in ['published']])
-    #inspire_citations = np.concatenate([[p['inspire_citations'] for p in papers[k]['data']] for k in ['published']])
+    ads_citations = np.concatenate([[p['ads_citations'] for p in papers[k]['data']] for k in ['submitted','published']])
     inspire_citations = np.concatenate([[p['inspire_citations'] for p in papers[k]['data']] for k in ['published']])
-    #max_citations_excluding = np.maximum(ads_citations,inspire_citations)
     max_citations_excluding = np.maximum(ads_citations,inspire_citations)
     totalnumber_excluding = np.sum(max_citations_excluding)
     hind_excluding = hindex(max_citations_excluding)
@@ -576,8 +570,7 @@ def markdownpapers(papers,filename="_publications.md"):
 
     out=[]
 
-    #papertype= ['submitted','published','proceedings']
-    papertype= ['published']
+    papertype= ['submitted','published','proceedings']
 
 
     out.append("## Summary")
@@ -1056,8 +1049,7 @@ def checkblogposts(papers,directory='temp'):
     os.system(f"mkdir -p {directory}")
     os.system(f"rm -f {directory}/*")
 
-    #for k in ['submitted','published','proceedings']:
-    for k in ['published']:
+    for k in ['submitted','published','proceedings']:
         for p in papers[k]['data']:
 
             target_substring = slugify(p['title'])

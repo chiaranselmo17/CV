@@ -1158,7 +1158,7 @@ if __name__ == "__main__":
     testing = False
 
     # Git pull
-    os.system("git pull")
+    #os.system("git pull")
 
     # Citations
     papers = ads_citations(papers,testing=testing)
@@ -1186,13 +1186,4 @@ if __name__ == "__main__":
     # Clean auxiliary files
     os.system('rm -f *.aux *.log *.toc *.out *.bbl *.blg *.fls *.fdb_latexmk *.synctex.gz *.nav *.snm *.vrb *.lof *.lot *Notes.bib')
 
-    if not testing:
-        # Git push
-        try:
-            comment = sys.argv[1]
-        except:
-            comment = "Generic update"
-        print("Push to git:", comment)
-        os.system("git add -u")
-        os.system("git commit -m '"+comment+"'")
-        os.system("git push")
+    print("CV generation complete")

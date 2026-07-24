@@ -304,7 +304,7 @@ def parsepapers(papers,filename="parsepapers.tex"):
             out.append(f"\\textbf{{{i}.}} & & \\textit{{{title}}}")
             
             out.append("\\newline{}")
-            out.append(p['author'].replace("D. Gerosa","\\textbf{D. Gerosa}").strip(".")+".")
+            out.append(p['author'].replace("C. Anselmo","\\textbf{C. Anselmo}").strip(".")+".")
             out.append("\\newline{}")
             line=""
             if p['link']:
@@ -350,9 +350,9 @@ def metricspapers(papers,filename="metricspapers.tex"):
     first_author = []
     for k in ['submitted','published','proceedings']:
         for p in papers[k]['data']:
-            if "D. Gerosa" not in p['author']:
+            if "C. Anselmo" not in p['author']:
                 raise ValueError("Looks like you're not an author:", p['title'])
-            first_author.append( p['author'].split("D. Gerosa")[0]=="" )
+            first_author.append( p['author'].split("C. Anselmo")[0]=="" )
 
     out.append("(out of which \\textbf{"+str(np.sum(first_author))+"} first-authored papers and")
 
@@ -595,7 +595,7 @@ def markdownpapers(papers,filename="_publications.md"):
         out.append("")
 
         for p in papers[k]['data']:
-            name = p['author'].replace("D. Gerosa","**D. Gerosa**").strip(".")
+            name = p['author'].replace("C. Anselmo","**C. Anselmo**").strip(".")
             name = name.replace("\\`o", "o'")
             name = name.replace("\\v{s}", "s")
             out.append("**"+str(i)+".**")
@@ -776,10 +776,10 @@ def markdowngroup(group, filename="_group.md"):
 
     #merged_current.insert(len(merged_current), {
     merged_current.insert(0, {
-        "name": "Davide Gerosa",
-        "role": "Associate professor",
-        "email": "davide.gerosa@unimib.it",
-        "bio": "That's me, running, gravity, football, rock music, some more gravity. Astrophysics when I want to remember things are real, mountains when I want to see things are beautiful."
+        "name": "Chiara Anselmo",
+        "role": "Ph.D student",
+        "email": "c.anselmo@campus.unimib.it",
+        "bio": "Fascinated by black holes, art, and nature."
     })
 
  #   for x in merged_current:

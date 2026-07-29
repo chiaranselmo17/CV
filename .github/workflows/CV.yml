@@ -12,25 +12,18 @@ jobs:
     steps:
       - name: Checkout CV
         uses: actions/checkout@v4
-        with:
-          path: CV
-
-      - name: Checkout website
-        uses: actions/checkout@v4
 
       - name: Install Python dependencies
         run: |
           pip install numpy tqdm requests ads
 
-      - name: Run makeCV
-        run: python makeCV.py
-        env:
-          ADS_TOKEN: ${{ secrets.ADS_TOKEN}}
-
       - name: Install latex
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra gh
+          sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra    
+
+      - name: Run makeCV
+        run: python makeCV.py
 
       - name: Compile latex
         run: |
@@ -39,12 +32,12 @@ jobs:
           pdflatex publist.tex
           pdflatex talklist.tex
 
+      - name: Check PDFs
+        run: |
+          ls -lh *.pdf
+
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
           name: CV-pdfs
-          path: |
-            CV.pdf
-            CVshort.pdf
-            publist.pdf
-            talklist.pdf
+          path: "*.pdf"

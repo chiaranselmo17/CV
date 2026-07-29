@@ -5,6 +5,9 @@ on:
   push:
     branches: [ master ]
 
+permissions:
+  contents: write
+
 jobs:
   build_CV:
     runs-on: ubuntu-latest
@@ -36,8 +39,25 @@ jobs:
         run: |
           ls -lh *.pdf
 
-      - name: Upload PDFs
-        uses: actions/upload-artifact@v4
-        with:
-          name: CV-pdfs
-          path: "*.pdf"
+      - name: Rename PDFs
+        run: |
+          cp CV.pdf ChiaraAnselmo_fullCV.pdf
+          cp CVshort.pdf ChiaraAnselmo_shortCV.pdf
+          cp publist.pdf ChiaraAnselmo_publist.pdf
+          cp talklist.pdf ChiaraAnselmo_talklist.pdf
+
+      - name: Create GitHub release
+        run: |
+          gh release delete latest --yes || true
+          git push --delete origin latest || true
+          gh release create latest \
+          ChiaraAnselmo_fullCV.pdf \
+          ChiaraAnselmo_shortCV.pdf \
+          ChiaraAnselmo_publist.pdf \
+          ChiaraAnselmo_talklist.pdf \
+          --notes "Automated CV update"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

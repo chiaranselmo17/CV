@@ -90,11 +90,39 @@ if conferences:
         "more":     ""
         })
 
+    talks['conferences']['data'].append({
+        "title":    "Ringdown analysis of GW190521 with simulation-based inference",
+        "what":     "SIGRAV",
+        "where":    "Milan, Italy",
+        "when":     "Sep 2025",
+        "invited":  False,
+        "more":     ""
+        })
+
+    talks['conferences']['data'].append({
+        "title":    "Chasing evidence of spin precession in the ringdown: a fresh look at GW190521",
+        "what":     "TEONGRAV workshop",
+        "where":    "Pisa, Italy",
+        "when":     "Jan 2026",
+        "invited":  False,
+        "more":     ""
+        })
+
 
 if seminars:
     talks['seminars'] = {}
     talks['seminars']['label'] = 'Talks at department seminars'
     talks['seminars']['data'] = []
+
+    talks['seminars']['data'].append({
+        "title":    "Two complementary approaches to gravitational-wave data analysis",
+        "what":     "TAPIR seminar",
+        "where":    "Caltech, California, USA",
+        "when":     "May 2026",
+        "invited":  True,
+        "more":     ""
+        })
+
 
 
 if lectures:

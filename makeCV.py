@@ -452,8 +452,8 @@ def metricstalks(talks,filename="metricstalks.tex"):
     plural = "s" if len(talks['lectures']['data'])>1 else ""
 
     out.append("(out of which \\textbf{"+str(np.sum(invited))+"} invited presentations),")
-    out.append("\\textbf{"+str(len(talks['lectures']['data']))+"} lecture"+plural+" at PhD schools,")
-    out.append("\\textbf{"+str(len(talks['outreach']['data']))+"} outreach talks.")
+    #out.append("\\textbf{"+str(len(talks['lectures']['data']))+"} lecture"+plural+" at PhD schools,")
+    #out.append("\\textbf{"+str(len(talks['outreach']['data']))+"} outreach talks.")
 
     out.append("\end{tabular} }")
 

@@ -11,9 +11,9 @@ others = True
 talks  = {}
 conferences= True
 seminars = True
-lectures = True
+lectures = False
 posters = True
-outreach = True
+outreach = False
 
 group  = {}
 fellowships = True

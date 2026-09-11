@@ -404,7 +404,7 @@ def parsetalks(talks,filename="parsetalks.tex"):
     out.append("\\vspace{0.2cm}")
     out.append("")
 
-    for k in ['conferences','seminars','lectures','posters','outreach']:
+    for k in ['conferences','seminars','posters']: #['conferences','seminars','lectures','posters','outreach']
         out.append("\\textcolor{color1}{\\textbf{"+talks[k]['label']+":}}")
         out.append("\\vspace{-0.5cm}")
         out.append("")
@@ -449,7 +449,7 @@ def metricstalks(talks,filename="metricstalks.tex"):
         for p in talks[k]['data']:
             invited.append(p['invited'])
 
-    plural = "s" if len(talks['lectures']['data'])>1 else ""
+    #plural = "s" if len(talks['lectures']['data'])>1 else ""
 
     out.append("(out of which \\textbf{"+str(np.sum(invited))+"} invited presentations),")
     #out.append("\\textbf{"+str(len(talks['lectures']['data']))+"} lecture"+plural+" at PhD schools,")

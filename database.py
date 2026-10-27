@@ -107,6 +107,15 @@ if conferences:
         "invited":  False,
         "more":     ""
         })
+    
+    talks['conferences']['data'].append({
+        "title":    "Can we 'patch' eccentricity onto precessing QNM amplitudes?",
+        "what":     "Ringdown in Lisbon workshop",
+        "where":    "Lisbon, Italy",
+        "when":     "Oct 2026",
+        "invited":  True,
+        "more":     "Discussion slide"
+        })
 
 
 if seminars:

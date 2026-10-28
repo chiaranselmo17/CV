@@ -114,7 +114,7 @@ if conferences:
         "where":    "Lisbon, Italy",
         "when":     "Oct 2026",
         "invited":  True,
-        "more":     "Discussion slide"
+        "more":     ""
         })
 
 

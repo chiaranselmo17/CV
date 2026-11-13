@@ -9,8 +9,8 @@ on:
       - database.py
       - makeCV.py
       - .github/workflows/CV_update.yml
-  schedule:
-    - cron: '18 1 * * *' 
+#  schedule:
+#    - cron: '18 1 * * *' 
 
 jobs:
   CV_update:

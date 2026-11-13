@@ -634,7 +634,7 @@ def buildbib(filename='publist.bib'):
                         bib = r.text.strip()
                     
                     if not bib:
-                    raise ValueError("ADS returned an empty BibTeX export for " + p['ads_found'])
+                        raise ValueError("ADS returned an empty BibTeX export for " + p['ads_found'])
 
 with open(filename, 'a') as f:
     f.write(bib + "\n")

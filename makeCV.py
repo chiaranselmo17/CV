@@ -22,7 +22,6 @@ import unicodedata
 from glob import glob   
 
 context = ssl._create_unverified_context()
-relativepathwebsiterepo = os.path.abspath(os.getcwd())+"/../website"
 is_github_actions = os.getenv("GITHUB_ACTIONS", "").lower() == "true"
 
 #### Utils ####
@@ -1309,13 +1308,6 @@ if __name__ == "__main__":
     parsegroup(group)
     CVshort()
     buildbib()
-
-    # Website
-    markdownpapers(papers)
-    markdowntalks(talks)
-    markdowngroup(group)
-    markdowncitations(papers)   
-    checkblogposts(papers)
 
     # Database
     replacekeys()

@@ -1,1 +1,1 @@
-gh workflow run CV_website.yml
+gh workflow run CV_update.yml

@@ -402,7 +402,8 @@ def parsetalks(talks,filename="parsetalks.tex"):
     out.append("\\vspace{0.2cm}")
     out.append("")
 
-    for k in ['conferences','seminars','lectures','posters','outreach']:
+    #for k in ['conferences','seminars','lectures','posters','outreach']:
+    for k in ['conferences','seminars','posters']:
         out.append("\\textcolor{color1}{\\textbf{"+talks[k]['label']+":}}")
         out.append("\\vspace{-0.5cm}")
         out.append("")
@@ -806,7 +807,8 @@ def markdowntalks(talks, filename="_talks.md"):
     out.append("")
     out.append("## Summary")
 
-    categories = ['conferences', 'seminars', 'lectures', 'posters', 'outreach']
+    #categories = ['conferences', 'seminars', 'lectures', 'posters', 'outreach']
+    categories = ['conferences', 'seminars', 'posters']
 
     for k in categories:
         total = len(talks[k]['data'])

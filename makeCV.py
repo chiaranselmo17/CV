@@ -585,29 +585,40 @@ def CVshort(filename='CVshort.tex'):
     with open(filename, 'w') as f:
         f.write(CVshort)
 
+
 def buildbib(filename='publist.bib'):
 
     print("Build bib file from ADS")
 
     token = os.getenv("ADS_TOKEN")
     if not token:
-        raise RuntimeError("ADS_TOKEN is missing. Set ADS_TOKEN in your environment before building the bibliography.")
+        raise RuntimeError(
+            "ADS_TOKEN is missing. Set ADS_TOKEN in your environment "
+            "before building the bibliography."
+        )
 
     with open(filename, 'r') as f:
         publist = f.read()
 
     stored = []
     for p in publist.split('@'):
-        if "BibDesk" not in p:
+        if "BibDesk" not in p and "{" in p:
             stored.append(p.split("{")[1].split(",")[0])
 
     tot = len(np.concatenate([papers[k]['data'] for k in papers]))
+
     with tqdm(total=tot) as pbar:
         for k in papers:
             for p in papers[k]['data']:
-                if  p['ads_found'] and p['ads_found'] not in stored:
+
+                if p['ads_found'] and p['ads_found'] not in stored:
+
                     with warnings.catch_warnings():
-                        warnings.filterwarnings("ignore", message="Unverified HTTPS request is being made to host")
+                        warnings.filterwarnings(
+                            "ignore",
+                            message="Unverified HTTPS request is being made to host"
+                        )
+
                         r = requests.get(
                             "https://api.adsabs.harvard.edu/v1/export/bibtex/"
                             + urllib.parse.quote(p['ads_found'], safe=""),
@@ -617,8 +628,11 @@ def buildbib(filename='publist.bib'):
                         )
 
                     if r.status_code == 404:
-                        print(f"\nWARNING: {p['ads_found']} not found on ADS. Creating local BibTeX entry.")
-                        
+                        print(
+                            f"\nWARNING: {p['ads_found']} not found on ADS. "
+                            "Creating local BibTeX entry."
+                        )
+
                         bib = (
                             f"@article{{{p['ads_found']},\n"
                             f"  title   = {{{p['title']}}},\n"
@@ -629,28 +643,23 @@ def buildbib(filename='publist.bib'):
                             f"  primaryClass = {{gr-qc}}\n"
                             f"}}\n"
                         )
+
                     else:
                         r.raise_for_status()
                         bib = r.text.strip()
-                    
-                    if not bib:
-                        raise ValueError("ADS returned an empty BibTeX export for " + p['ads_found'])
 
-with open(filename, 'a') as f:
-    f.write(bib + "\n")
-                    
                     if not bib:
-                        raise ValueError("ADS returned an empty BibTeX export for "+p['ads_found'])
-                    # q=list(ads.SearchQuery(bibcode=p['ads_found'], fl=['bibtex']))[0]
-                    # bib = q.bibtex
-                    # if "journal =" in bib:
-                    #     j  = bib.split("journal =")[1].split("}")[0].split("{")[1]
-                    #     bib = bib.replace(j,convertjournal(j)[0])
+                        raise ValueError(
+                            "ADS returned an empty BibTeX export for "
+                            + p['ads_found']
+                        )
 
                     with open(filename, 'a') as f:
-                        f.write(bib)
-                pbar.update(1)
+                        f.write(bib + '\n')
 
+                    stored.append(p['ads_found'])
+
+                pbar.update(1)
 
 
 #### Website markdown ####

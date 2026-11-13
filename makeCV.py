@@ -615,8 +615,30 @@ def buildbib(filename='publist.bib'):
                             verify=False,
                             timeout=30,
                         )
-                    r.raise_for_status()
-                    bib = r.text.strip()
+
+                    if r.status_code == 404:
+                        print(f"\nWARNING: {p['ads_found']} not found on ADS. Creating local BibTeX entry.")
+                        
+                        bib = (
+                            f"@article{{{p['ads_found']},\n"
+                            f"  title   = {{{p['title']}}},\n"
+                            f"  author  = {{{p['author']}}},\n"
+                            f"  journal = {{arXiv preprint}},\n"
+                            f"  eprint  = {{{p['arxiv'].replace('arXiv:', '').split()[0]}}},\n"
+                            f"  archivePrefix = {{arXiv}},\n"
+                            f"  primaryClass = {{gr-qc}}\n"
+                            f"}}\n"
+                        )
+else:
+    r.raise_for_status()
+    bib = r.text.strip()
+
+if not bib:
+    raise ValueError("ADS returned an empty BibTeX export for " + p['ads_found'])
+
+with open(filename, 'a') as f:
+    f.write(bib + "\n")
+                    
                     if not bib:
                         raise ValueError("ADS returned an empty BibTeX export for "+p['ads_found'])
                     # q=list(ads.SearchQuery(bibcode=p['ads_found'], fl=['bibtex']))[0]

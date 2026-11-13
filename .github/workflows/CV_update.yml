@@ -66,7 +66,7 @@ jobs:
             echo "STEP START: Compile latex"
             echo "TIME (UTC): $(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
             echo "================================================================================"
-            for f in CV CVshort publist talklist; do
+            for f in CV publist talklist; do
               pdflatex "$f".tex
             done
           } 2>&1 | tee -a workflow.txt
@@ -81,8 +81,7 @@ jobs:
             echo "STEP START: Copy files"
             echo "TIME (UTC): $(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
             echo "================================================================================"
-            cp CV.pdf ChiaraAnselmo_fullCV.pdf
-            cp CVshort.pdf ChiaraAnselmo_shortCV.pdf
+            cp CV.pdf ChiaraAnselmo_CV.pdf
             cp publist.pdf ChiaraAnselmo_publist.pdf
             cp talklist.pdf ChiaraAnselmo_talklist.pdf
           } 2>&1 | tee -a workflow.txt

@@ -629,9 +629,9 @@ def buildbib(filename='publist.bib'):
                             f"  primaryClass = {{gr-qc}}\n"
                             f"}}\n"
                         )
-else:
-    r.raise_for_status()
-    bib = r.text.strip()
+                    else:
+                        r.raise_for_status()
+                        bib = r.text.strip()
 
 if not bib:
     raise ValueError("ADS returned an empty BibTeX export for " + p['ads_found'])

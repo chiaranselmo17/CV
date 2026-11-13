@@ -1290,7 +1290,7 @@ def replacekeys():
 if __name__ == "__main__":
 
     # Set testing=True to avoid API limit
-    testing = False
+    testing = True
 
     # Git pull
     if not is_github_actions:

@@ -178,10 +178,6 @@ def ads_citations(papers,testing=False):
 
     print('Get citations from ADS')
 
-    #with open('/Users/dgerosa/reps/dotfiles/adstoken.txt') as f:
-    #    #ads.config.token = f.read()
-    #    token = f.read()
-
     token = os.getenv("ADS_TOKEN")
     if not token and not testing:
         raise RuntimeError("ADS_TOKEN is missing. Set ADS_TOKEN in your environment (GitHub Actions secret) before running.")
@@ -311,7 +307,7 @@ def parsepapers(papers,filename="parsepapers.tex"):
             out.append(f"\\textbf{{{i}.}} & & \\textit{{{title}}}")
             
             out.append("\\newline{}")
-            out.append(p['author'].replace("D. Gerosa","\\textbf{D. Gerosa}").strip(".")+".")
+            out.append(p['author'].replace("C. Anselmo","\\textbf{C. Anselmo}").strip(".")+".")
             out.append("\\newline{}")
             line=""
             if p['link']:
@@ -357,9 +353,9 @@ def metricspapers(papers,filename="metricspapers.tex"):
     first_author = []
     for k in ['submitted','published','proceedings']:
         for p in papers[k]['data']:
-            if "D. Gerosa" not in p['author']:
+            if "C. Anselmo" not in p['author']:
                 raise ValueError("Looks like you're not an author:", p['title'])
-            first_author.append( p['author'].split("D. Gerosa")[0]=="" )
+            first_author.append( p['author'].split("C. Anselmo")[0]=="" )
 
     out.append("(out of which \\textbf{"+str(np.sum(first_author))+"} first-authored papers and")
 
@@ -393,11 +389,6 @@ def metricspapers(papers,filename="metricspapers.tex"):
     out.append(" --- ")
     out.append("\\textcolor{mark_color}{\\textbf{h-index}}: "+str(hind_excluding)+" ["+str(hind_including)+"].")
     out.append("\\\\")  
-    out.append("\\textcolor{mark_color}{\\textbf{Web links to list services}}:")
-    out.append("\href{https://davidegerosa.com/myads}{\\textsc{ADS}};")
-    out.append("\href{https://davidegerosa.com/myinspire}{\\textsc{InSpire}};")
-    out.append("\href{http://davidegerosa.com/myarxiv}{\\textsc{arXiv}};")
-    out.append("\href{https://davidegerosa.com/myorcid}{\\textsc{ORCID}}.")
 
     with open(filename,"w") as f: f.write("\n".join(out))
 
@@ -708,7 +699,7 @@ def markdownpapers(papers,filename="_publications.md"):
         out.append("")
 
         for p in papers[k]['data']:
-            name = p['author'].replace("D. Gerosa","**D. Gerosa**").strip(".")
+            name = p['author'].replace("C. Anselmo","**C. Anselmo**").strip(".")
             out.append("**"+str(i)+".**")
             #out.append("*"+p['title'].strip(".").replace("$", "$$")+"*.\\")
             title = p['title'].rstrip(".").replace("$", "$$")
@@ -889,10 +880,10 @@ def markdowngroup(group, filename="_group.md"):
 
     #merged_current.insert(len(merged_current), {
     merged_current.insert(0, {
-        "name": "Davide Gerosa",
-        "role": "Associate professor",
-        "email": "davide.gerosa@unimib.it",
-        "bio": "That's me, running, gravity, football, rock music, some more gravity. Astrophysics when I want to remember things are real, mountains when I want to see things are beautiful."
+        "name": "Chiara Anselmo",
+        "role": "PhD Student",
+        "email": "c.anselmo@campus.unimib.it",
+        "bio": ""
     })
 
  #   for x in merged_current:
@@ -1212,7 +1203,7 @@ def checkblogposts(papers,directory='temp'):
                 [out.append("") for _ in range(5)] 
 
                 #out.append("*"+p['title'].strip(".").replace("$", "$$")+"*.\\")
-                out.append(p['author'].replace("D. Gerosa","**D. Gerosa**").strip(".")+".\\")
+                out.append(p['author'].replace("C. Anselmo","**C. Anselmo**").strip(".")+".\\")
                 line=""
                 if p['link']:
                     line+='['

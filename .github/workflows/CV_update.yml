@@ -2,13 +2,13 @@ name: CV_update workflow
 
 on:
   workflow_dispatch:
-#  push:
-#    branches: [ master ]
-#    paths:
-#      - CV.tex
-#      - database.py
-#      - makeCV.py
-#      - .github/workflows/CV_update.yml
+  push:
+    branches: [ master ]
+    paths:
+      - CV.tex
+      - database.py
+      - makeCV.py
+      - .github/workflows/CV_update.yml
   schedule:
     - cron: '18 1 * * *' 
 

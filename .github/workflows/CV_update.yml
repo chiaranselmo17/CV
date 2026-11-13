@@ -1,0 +1,115 @@
+name: CV_update workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - CV.tex
+      - database.py
+      - makeCV.py
+      - .github/workflows/CV_update.yml
+  schedule:
+    - cron: '18 1 * * *' 
+
+jobs:
+  CV_update:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/cv-ci:latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout CV
+        uses: actions/checkout@v4
+        with:
+          path: CV
+
+      - name: Init workflow log
+        shell: bash
+        run: |
+          set -euo pipefail
+          : > CV/workflow.txt
+
+      - name: Generate CV inputs (citations, markdown, tex)
+        working-directory: CV
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "================================================================================"
+            echo "STEP START: Generate CV inputs (makeCV.py)"
+            echo "TIME (UTC): $(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
+            echo "================================================================================"
+            python -c 'import os; t=os.getenv("ADS_TOKEN",""); print("ADS_TOKEN set:", bool(t), "len:", len(t))'
+            python -u makeCV.py
+          } 2>&1 | tee -a workflow.txt
+        env:
+          ADS_TOKEN: ${{ secrets.ADS_TOKEN }}
+
+      - name: Upload blogpost templates
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blogpost-templates
+          path: CV/temp
+          if-no-files-found: ignore
+
+      - name: Compile latex
+        working-directory: CV
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "================================================================================"
+            echo "STEP START: Compile latex"
+            echo "TIME (UTC): $(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
+            echo "================================================================================"
+            for f in CV CVshort publist talklist; do
+              pdflatex "$f".tex
+            done
+          } 2>&1 | tee -a workflow.txt
+
+      - name: Copy files
+        working-directory: CV
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "================================================================================"
+            echo "STEP START: Copy files"
+            echo "TIME (UTC): $(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
+            echo "================================================================================"
+            cp CV.pdf ChiaraAnselmo_fullCV.pdf
+            cp CVshort.pdf ChiaraAnselmo_shortCV.pdf
+            cp publist.pdf ChiaraAnselmo_publist.pdf
+            cp talklist.pdf ChiaraAnselmo_talklist.pdf
+          } 2>&1 | tee -a workflow.txt
+
+      - name: Commit and push CV updates
+        working-directory: CV
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "================================================================================"
+            echo "STEP START: Commit and push CV updates"
+            echo "TIME (UTC): $(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
+            echo "================================================================================"
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            # workflow.txt is a run log (uploaded as an artifact) and should not be committed.
+            git reset -q workflow.txt || true
+            git commit -m "CV update from workflow" || echo "No changes"
+            git push
+          } 2>&1 | tee -a workflow.txt
+
+      - name: Upload workflow log artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workflow-log
+          path: CV/workflow.txt
+          if-no-files-found: error
